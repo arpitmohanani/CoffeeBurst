@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Rocket Fuel</string>
+
+    <string name="facebook_app_id">675573757110196</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="swipe_left_for_register">Swipe Left for Register</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="e_mail">Email</string>
+    <string name="tag">Let\'s join us and \nBuild your relationship with others</string>
+    <string name="swipe_right_for_login">Swipe Right for Login</string>
+    <string name="register">Register</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="your_name">Full Name</string>
+    <string name="txtViewItemTitle">TitlePlaceholder</string>
+    <string name="TextViewChooseSize">Please choose the size of your drink</string>
+    <string name="BtnTextAddToCart">Add to cart</string>
+    <string name="TextViewSizeLarge">Large</string>
+    <string name="TextViewSizeMedium">Medium</string>
+    <string name="TextViewSizeSmall">Small</string>
+    <string name="CoffeeDepartment">Coffee</string>
+    <string name="TeaDepartment">Tea</string>
+
+
+</resources>

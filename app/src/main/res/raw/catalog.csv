@@ -1,0 +1,8 @@
+Item, ItemCode, Category, Price, Image
+«Americano», «0000», «Coffee»,3, «americano.png»
+«Cappuccino», «0001», «Coffee»,5, «cappuchino.png»
+«Latte», «0002», «Coffee»,6, «latte.png»
+«Mocca», «0003», «Coffee»,6, «mocca.png»
+«Chai», «0004», «Tea»,5, «chai.png»
+«Matcha», «0005», «Tea»,7, «matcha.png»
+«Green Tea», «0006», «Tea»,2, «greantea.png»
