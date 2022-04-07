@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -112,9 +111,9 @@ public class DisplayStores extends AppCompatActivity {
                 (AdapterView<?> adapterView, View view, int i, long l) -> {
                     bundle.putString("SIGNINTYPE",signInType);
                     bundle.putString("FULLNAME",fullName);
-                    openHomeActivity = new Intent(DisplayStores.this, HomeActivity.class);
+                    openHomeActivity = new Intent(DisplayStores.this, CatalogActivity.class);
                     openHomeActivity.putExtras(bundle);
-                    startActivity(new Intent(DisplayStores.this, HomeActivity.class));
+                    startActivity(openHomeActivity);
                 });
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
