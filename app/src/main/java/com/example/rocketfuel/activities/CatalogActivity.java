@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class CatalogActivity extends AppCompatActivity {
 
@@ -38,7 +37,7 @@ public class CatalogActivity extends AppCompatActivity {
     private ArrayList<Product> coffeeModelArrayList;
     private ArrayList<Product> teaModelArrayList;
 
-    //    ActivityCatalogBinding binding;
+    ActivityCatalogBinding binding;
     ProductDatabase db;
 
     @Override
@@ -54,8 +53,9 @@ public class CatalogActivity extends AppCompatActivity {
         coffeeModelArrayList = new ArrayList<>();
         teaModelArrayList = new ArrayList<>();
 
-        AtomicReference<ProductAdapter> coffeeAdapter = new AtomicReference<>(new ProductAdapter(this, coffeeModelArrayList));
-        AtomicReference<ProductAdapter> teaAdapter = new AtomicReference<>(new ProductAdapter(this, teaModelArrayList));
+        binding = ActivityCatalogBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         List<Product> AllProducts = ReadProductsCSV();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -65,8 +65,6 @@ public class CatalogActivity extends AppCompatActivity {
         //coffeeRecyclerView.setAdapter(coffeeAdapter);
 
         teaRecyclerView.setLayoutManager(linearLayoutManager2);
-        teaRecyclerView.setAdapter(teaAdapter.get());
-        coffeeRecyclerView.setAdapter(coffeeAdapter.get());
         //teaRecyclerView.setAdapter(teaAdapter);
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -81,8 +79,10 @@ public class CatalogActivity extends AppCompatActivity {
                 //instead of setting the data directly from file
                 //we are setting it after getting it from Database
                 runOnUiThread(() ->{
-                    coffeeAdapter.get().updateList(coffeeModelArrayList);
-                    teaAdapter.get().updateList(teaModelArrayList);
+                    ProductAdapter coffeeAdapter = new ProductAdapter(this, coffeeModelArrayList);
+                    ProductAdapter teaAdapter = new ProductAdapter(this, teaModelArrayList);
+                    teaRecyclerView.setAdapter(teaAdapter);
+                    coffeeRecyclerView.setAdapter(coffeeAdapter);
                 });
             } catch (Exception ex){
                 Log.d("CoffeeBurst",ex.getMessage());
@@ -95,13 +95,11 @@ public class CatalogActivity extends AppCompatActivity {
                         Intent intent = new Intent(CatalogActivity.this, ProductCardActivity.class);
                         ProductAdapter.Viewholder mod = (ProductAdapter.Viewholder) coffeeRecyclerView.findViewHolderForAdapterPosition(position);
                         String name = (String) Objects.requireNonNull(mod).productNameTV.getText();
-                        String price = (String) Objects.requireNonNull(mod).productPriceIV.getText();
-                        //Double priceDouble = Double.parseDouble(price);
                         intent.putExtra("name", name);
-                        intent.putExtra("price", price);
-                        //int imageId = Objects.requireNonNull(mod).productIV.AppCompatResources.getDrawable(this,this.getResources().getIdentifier(IMAGE_NAME.split("\\.")[0] , "drawable", this.getPackageName())));
-                        //intent.putExtra("imgId", imageId);
+                        int imageId = Objects.requireNonNull(mod).productIV.getId();
+                        intent.putExtra("imgId", imageId);
                         System.out.println(name);
+                        System.out.println(imageId);
                         startActivity(intent);
                     }
                     @Override public void onLongItemClick(View view, int position) {
