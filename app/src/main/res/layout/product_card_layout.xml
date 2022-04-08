@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    //<androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:background="@color/black"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toTopOf="parent">
+    //
 
-</androidx.appcompat.widget.Toolbar>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:id="@+id/imgViewProductCardImage"
@@ -45,51 +47,60 @@
 
     <RadioGroup
         android:id="@+id/radioGroupSizes"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="413dp"
+        android:layout_height="161dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/radioButtonLarge"
-        app:layout_constraintTop_toBottomOf="@+id/textViewChooseSize"
-        tools:layout_editor_absoluteX="0dp">
-
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="254dp"
-        android:layout_height="48dp"
-        android:text="@string/BtnTextAddToCart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChooseSize"
+        app:layout_constraintVertical_bias="0.0">
+
+        <RadioButton
+            android:id="@+id/radioBtnSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/TextViewSizeSmall"
+            android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton
+            android:id="@+id/radioBtnMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/TextViewSizeMedium"
+            android:onClick="onRadioButtonClicked"
+            />
+
+        <RadioButton
+            android:id="@+id/radioBtnLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/TextViewSizeLarge"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtViewPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ProductPriceTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewPriceLabel"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <TextView
+        android:id="@+id/txtViewPriceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Price:"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupSizes" />
-
-    <RadioButton
-        android:id="@+id/radioButtonLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/TextViewSizeLarge"
-        app:layout_constraintTop_toBottomOf="@+id/radioButtonMedium"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <RadioButton
-        android:id="@+id/radioButtonMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onRadioButtonClicked"
-        android:text="@string/TextViewSizeMedium"
-        app:layout_constraintTop_toBottomOf="@+id/radioButtonSmall"
-        tools:layout_editor_absoluteX="-4dp" />
-
-    <RadioButton
-        android:id="@+id/radioButtonSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onRadioButtonClicked"
-        android:text="@string/TextViewSizeSmall"
-        app:layout_constraintTop_toBottomOf="@+id/textViewChooseSize"
-        tools:layout_editor_absoluteX="-1dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
