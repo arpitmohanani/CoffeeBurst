@@ -1,6 +1,7 @@
 package com.example.rocketfuel.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CatalogActivity extends AppCompatActivity {
 
@@ -48,14 +50,13 @@ public class CatalogActivity extends AppCompatActivity {
         teaRecyclerView = findViewById(R.id.idRVTea);
 
         db = Room.databaseBuilder(getApplicationContext(),
-                ProductDatabase.class,"Products.db").build();
+                ProductDatabase.class, "Products.db").build();
 
         coffeeModelArrayList = new ArrayList<>();
         teaModelArrayList = new ArrayList<>();
 
-        binding = ActivityCatalogBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        AtomicReference<ProductAdapter> coffeeAdapter = new AtomicReference<>(new ProductAdapter(this, coffeeModelArrayList));
+        AtomicReference<ProductAdapter> teaAdapter = new AtomicReference<>(new ProductAdapter(this, teaModelArrayList));
 
         List<Product> AllProducts = ReadProductsCSV();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -65,6 +66,8 @@ public class CatalogActivity extends AppCompatActivity {
         //coffeeRecyclerView.setAdapter(coffeeAdapter);
 
         teaRecyclerView.setLayoutManager(linearLayoutManager2);
+        teaRecyclerView.setAdapter(teaAdapter.get());
+        coffeeRecyclerView.setAdapter(coffeeAdapter.get());
         //teaRecyclerView.setAdapter(teaAdapter);
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -78,35 +81,60 @@ public class CatalogActivity extends AppCompatActivity {
 
                 //instead of setting the data directly from file
                 //we are setting it after getting it from Database
-                runOnUiThread(() ->{
-                    ProductAdapter coffeeAdapter = new ProductAdapter(this, coffeeModelArrayList);
-                    ProductAdapter teaAdapter = new ProductAdapter(this, teaModelArrayList);
-                    teaRecyclerView.setAdapter(teaAdapter);
-                    coffeeRecyclerView.setAdapter(coffeeAdapter);
+                runOnUiThread(() -> {
+                    coffeeAdapter.get().updateList(coffeeModelArrayList);
+                    teaAdapter.get().updateList(teaModelArrayList);
                 });
-            } catch (Exception ex){
-                Log.d("CoffeeBurst",ex.getMessage());
+            } catch (Exception ex) {
+                Log.d("CoffeeBurst", ex.getMessage());
             }
         });
 
         coffeeRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, coffeeRecyclerView,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(CatalogActivity.this, ProductCardActivity.class);
-                        ProductAdapter.Viewholder mod = (ProductAdapter.Viewholder) coffeeRecyclerView.findViewHolderForAdapterPosition(position);
-                        String name = (String) Objects.requireNonNull(mod).productNameTV.getText();
-                        intent.putExtra("name", name);
-                        int imageId = Objects.requireNonNull(mod).productIV.getId();
-                        intent.putExtra("imgId", imageId);
-                        System.out.println(name);
-                        System.out.println(imageId);
-                        startActivity(intent);
+                new RecyclerItemClickListener(this, coffeeRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        clck(view, position);
                     }
-                    @Override public void onLongItemClick(View view, int position) {
-                        System.out.println("@");
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        clck(view, position);
                     }
                 })
         );
+
+        teaRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, teaRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        clck(view, position);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        clck(view, position);
+                    }
+                })
+        );
+    }
+
+    private void clck(View view, int position) {
+        Intent intent = new Intent(CatalogActivity.this, ProductCardActivity.class);
+        ProductAdapter.Viewholder mod = (ProductAdapter.Viewholder) coffeeRecyclerView.findViewHolderForAdapterPosition(position);
+        String name = (String) Objects.requireNonNull(mod).productNameTV.getText();
+        String price = (String) Objects.requireNonNull(mod).productPriceIV.getText();
+        Objects.requireNonNull(mod).productIV.buildDrawingCache();
+        Bitmap im = Objects.requireNonNull(mod).productIV.getDrawingCache();
+        //Double priceDouble = Double.parseDouble(price);
+        intent.putExtra("name", name);
+        intent.putExtra("price", price);
+        //int imageId = Objects.requireNonNull(mod).productIV.AppCompatResources.getDrawable(this,this.getResources().getIdentifier(IMAGE_NAME.split("\\.")[0] , "drawable", this.getPackageName())));
+        Bundle extras = new Bundle();
+        extras.putParcelable("im", im);
+        intent.putExtras(extras);
+        System.out.println(name);
+        startActivity(intent);
     }
 
     private List<Product> ReadProductsCSV(){
