@@ -4,16 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFACB"
     tools:context=".activities.SignInPage">
+
+    <TextView
+        android:id="@+id/coffeeBurst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="Coffee Burst"
+        android:textColor="#803A3A"
+        android:textSize="45sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/signIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/coffeeBurst"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="Sign in"
         android:textSize="35dp"
@@ -96,17 +112,17 @@
     <!--        android:layout_margin="20dp"/>-->
 
     <TextView
+        android:id="@+id/others"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/others"
-        android:text="or sign in with"
         android:layout_above="@+id/socialIcons"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:text="or sign in with" />
 
     <LinearLayout
+        android:id="@+id/socialIcons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/socialIcons"
         android:layout_alignParentBottom="true"
         android:gravity="center">
 

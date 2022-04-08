@@ -10,6 +10,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -57,6 +58,7 @@ public class SignInPage extends AppCompatActivity {
     ActivityResultLauncher<Intent> activityResultLauncher;
     Intent openDisplayStoreActivity;
     Bundle bundle = new Bundle();
+    boolean isLoginSuccess = false;
 
     LoginDetailsDatabase db;
 
@@ -84,25 +86,38 @@ public class SignInPage extends AppCompatActivity {
 
         //Local SignIn
         btnLogin.setOnClickListener((View view) -> {
-            executorService.execute(() -> {
-                try {
-                    List<LoginDetails> AllLoginDetails = loginDetailsDao.GetAllCredentials();
-                    for(int i = 0 ; i < AllLoginDetails.size(); i++){
-                        if(AllLoginDetails.get(i).getUsername().equals(editTextUsername.getText().toString()) && AllLoginDetails.get(i).getPassword().equals(editTextPassword.getText().toString())){
-                            bundle.putString("SIGNINTYPE","Local");
-                            bundle.putString("FULLNAME",AllLoginDetails.get(i).getFullName());
-//                            openHomeActivity = new Intent(SignInPage.this, HomeActivity.class);
-                            openDisplayStoreActivity = new Intent(SignInPage.this, DisplayStores.class);
-                            openDisplayStoreActivity.putExtras(bundle);
-                            startActivity(openDisplayStoreActivity);
-                            finish();
+            if(editTextUsername.getText().toString().isEmpty()){
+                Toast.makeText(SignInPage.this,"Please enter a username", Toast.LENGTH_SHORT).show();
+            }else if(editTextPassword.getText().toString().isEmpty()){
+                Toast.makeText(SignInPage.this,"Please enter a password", Toast.LENGTH_SHORT).show();
+            }else{
+                executorService.execute(() -> {
+                    try {
+                        List<LoginDetails> AllLoginDetails = loginDetailsDao.GetAllCredentials();
+                        for(int i = 0 ; i < AllLoginDetails.size(); i++){
+                            if(AllLoginDetails.get(i).getUsername().equals(editTextUsername.getText().toString()) && AllLoginDetails.get(i).getPassword().equals(editTextPassword.getText().toString())){
+                                bundle.putString("SIGNINTYPE","Local");
+                                bundle.putString("FULLNAME",AllLoginDetails.get(i).getFullName());
+                                openDisplayStoreActivity = new Intent(SignInPage.this, DisplayStores.class);
+                                openDisplayStoreActivity.putExtras(bundle);
+                                isLoginSuccess = true;
+                                startActivity(openDisplayStoreActivity);
+                                finish();
+                            }
                         }
+                        if(!isLoginSuccess){
+                            Handler handler = new Handler();
+                            handler.post(new Runnable(){
+                                public void run() {
+                                    Toast.makeText(SignInPage.this,"Username and Password do not match. Please try again.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }catch (Exception ex){
+                        Log.d("DBDEMO", ex.getMessage());
                     }
-                }catch (Exception ex){
-                    Log.d("DBDEMO", ex.getMessage());
-                }
-            });
-
+                });
+            }
         });
 
         //Facebook SignIn

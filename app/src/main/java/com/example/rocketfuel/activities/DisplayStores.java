@@ -34,6 +34,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -45,6 +46,9 @@ import java.util.Locale;
 public class DisplayStores extends AppCompatActivity {
 
     TextView txtLocation;
+    TextView txtGreetings;
+    TextView txtInstructions;
+
     ListView listStoreName;
     Button btnSignOut;
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -61,7 +65,7 @@ public class DisplayStores extends AppCompatActivity {
     String location = "Hi ";
 
     List<String> ChicagoSiteNames = new ArrayList<>(
-            Arrays.asList("Rocket Fuel - Vancouver","Rocket Fuel - Burnaby","Rocket Fuel - Coquitlam", "Rocket Fuel - Richmond", "Rocket Fuel - Surrey"));
+            Arrays.asList("Coffee Burst Cafe - Vancouver","Coffee Burst Cafe - Burnaby","Coffee Burst Cafe - Coquitlam", "Coffee Burst Cafe - Richmond", "Coffee Burst Cafe - Surrey"));
     List<Integer> ChicagoSitePics = new ArrayList<>(Arrays.asList(
             R.drawable.coffee_icon, R.drawable.coffee_icon,R.drawable.coffee_icon, R.drawable.coffee_icon, R.drawable.coffee_icon));
     List<Store> StoreList = new ArrayList<>(populateList());
@@ -71,7 +75,9 @@ public class DisplayStores extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_stores);
 
-        txtLocation = findViewById(R.id.textViewLocation);
+        txtLocation = findViewById(R.id.txtViewLocation);
+        txtGreetings = findViewById(R.id.txtGreetings);
+        txtInstructions = findViewById(R.id.txtInstructions);
         listStoreName = findViewById(R.id.listStoreNames);
         btnSignOut = findViewById(R.id.btnSignOut);
 
@@ -86,7 +92,7 @@ public class DisplayStores extends AppCompatActivity {
         }else if(signInType.toLowerCase().equals("Google".toLowerCase())){
             GoogleSignOutSetup();
         }else if(signInType.toLowerCase().equals("Local".toLowerCase())){
-            //fullName.setText(("Full Name: " + getIntent().getExtras().getString("FULLNAME","Empty")));
+            txtGreetings.setText("Hi " + fullName);
         }
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
@@ -116,18 +122,20 @@ public class DisplayStores extends AppCompatActivity {
                     startActivity(openHomeActivity);
                 });
 
+//        txtGreetings.setText("Hi " + fullName);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         if(ActivityCompat.checkSelfPermission(DisplayStores.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            getLocation(fullName);
+            getLocation();
         }else{
             ActivityCompat.requestPermissions(DisplayStores.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
             if(ActivityCompat.checkSelfPermission(DisplayStores.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                getLocation(fullName);
+                getLocation();
             }else{
                 ActivityCompat.requestPermissions(DisplayStores.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
             }
         }
+        txtInstructions.setText("Please select a store nearest to you:");
     }
 
     public List<Store> populateList(){
@@ -141,7 +149,7 @@ public class DisplayStores extends AppCompatActivity {
     }
 
     @SuppressLint("MissingPermission")
-    private void getLocation(String fullName) {
+    private void getLocation() {
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
@@ -151,9 +159,7 @@ public class DisplayStores extends AppCompatActivity {
                         Geocoder geo = new Geocoder(DisplayStores.this, Locale.getDefault());
                         List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(),1);
 
-                        txtLocation.setText("Hi " + fullName + "\nLatitude: " + addresses.get(0).getLatitude() + "\nLongitude: " + addresses.get(0).getLongitude() +
-                                "\nCountry: " + addresses.get(0).getCountryName() + "\nLocality: " + addresses.get(0).getLocality() +
-                                "\nAddress: " + addresses.get(0).getAddressLine(0));
+                        txtLocation.setText("You are in "  + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea()+ ", " + addresses.get(0).getCountryName());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -169,12 +175,12 @@ public class DisplayStores extends AppCompatActivity {
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-//                        try {
-//                            facebookName = object.getString("name");
-//                            fullName.setText(facebookName);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
+                        try {
+                            facebookName = object.getString("name");
+                            txtGreetings.setText("Hi " + facebookName);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
         Bundle parameters = new Bundle();
@@ -190,5 +196,6 @@ public class DisplayStores extends AppCompatActivity {
 
         googleSignInClient = GoogleSignIn.getClient(this,googleSignInOptions);
         googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        txtGreetings.setText(("Hi " + googleSignInAccount.getDisplayName()));
     }
 }
