@@ -24,6 +24,7 @@
     <string name="TextViewSizeSmall">Small</string>
     <string name="CoffeeDepartment">Coffee</string>
     <string name="TeaDepartment">Tea</string>
+    <string name="ProductPriceTextView">Final Price</string>
 
 
 </resources>
