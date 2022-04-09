@@ -41,6 +41,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.google.android.gms:play-services-auth:20.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.14.2'
 
     def room_version = "2.4.2"
 

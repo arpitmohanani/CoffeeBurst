@@ -73,13 +73,23 @@
         android:id="@+id/txtViewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/ProductPriceTextView"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewPriceLabel"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewPriceLabel" />
+
+    <EditText
+        android:id="@+id/txtViewQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/txtQuantity"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupSizes" />
 
     <TextView
         android:id="@+id/txtViewPriceLabel"
@@ -89,10 +99,10 @@
         android:text="Price:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupSizes" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewQuantity" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAddToCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/BtnTextAddToCart"
