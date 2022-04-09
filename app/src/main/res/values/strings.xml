@@ -25,6 +25,7 @@
     <string name="CoffeeDepartment">Coffee</string>
     <string name="TeaDepartment">Tea</string>
     <string name="ProductPriceTextView">Final Price</string>
+    <string name="strViewSplash">Preparing you something tasty...</string>
 
 
 </resources>
