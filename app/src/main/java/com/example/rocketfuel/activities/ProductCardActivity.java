@@ -33,8 +33,10 @@ public class ProductCardActivity extends AppCompatActivity {
         drinkImage = findViewById(R.id.imgViewProductCardImage);
         drinkPrice = findViewById(R.id.txtViewPrice);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
         productName = intent.getStringExtra("name");
