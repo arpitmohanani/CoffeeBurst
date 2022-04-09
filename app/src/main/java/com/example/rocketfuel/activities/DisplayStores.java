@@ -88,9 +88,9 @@ public class DisplayStores extends AppCompatActivity {
         String fullName = getIntent().getExtras().getString("FULLNAME","Empty");
 
         if(signInType.toLowerCase().equals("Facebook".toLowerCase())){
-            //FacebookSignOutSetup();
+            FacebookSignOutSetup();
         }else if(signInType.toLowerCase().equals("Google".toLowerCase())){
-            //GoogleSignOutSetup();
+            GoogleSignOutSetup();
         }else if(signInType.toLowerCase().equals("Local".toLowerCase())){
             txtGreetings.setText("Hi " + fullName);
         }
@@ -148,25 +148,25 @@ public class DisplayStores extends AppCompatActivity {
         return listStores;
     }
 
-   /*@SuppressLint("MissingPermission")
-    private void getLocation() {
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                Location  location = task.getResult();
-
-                if(location!=null){
-                    try {
-                        Geocoder geo = new Geocoder(DisplayStores.this, Locale.getDefault());
-                        List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(),1);
-
-                        txtLocation.setText("You are in "  + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea()+ ", " + addresses.get(0).getCountryName());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }}
-
-        });};*/
+//   @SuppressLint("MissingPermission")
+//    private void getLocation() {
+//        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Location> task) {
+//                Location  location = task.getResult();
+//
+//                if(location!=null){
+//                    try {
+//                        Geocoder geo = new Geocoder(DisplayStores.this, Locale.getDefault());
+//                        List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(),1);
+//
+//                        txtLocation.setText("You are in "  + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea()+ ", " + addresses.get(0).getCountryName());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });}
 
     private void FacebookSignOutSetup(){
         facebookAccessToken = AccessToken.getCurrentAccessToken();
