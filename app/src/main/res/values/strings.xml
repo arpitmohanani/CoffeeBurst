@@ -26,6 +26,10 @@
     <string name="TeaDepartment">Tea</string>
     <string name="ProductPriceTextView">Final Price</string>
     <string name="strViewSplash">Preparing you something tasty...</string>
+    <string name="txtViewOrderHeader">Your Order:</string>
+    <string name="txtCheckout">Checkout</string>
+    <string name="txtContinue">Continue Shopping</string>
+    <string name="txtQuantity">Quantity</string>
 
 
 </resources>
