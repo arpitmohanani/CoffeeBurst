@@ -55,8 +55,8 @@ public class CatalogActivity extends AppCompatActivity {
         coffeeModelArrayList = new ArrayList<>();
         teaModelArrayList = new ArrayList<>();
 
-        AtomicReference<ProductAdapter> coffeeAdapter = new AtomicReference<>(new ProductAdapter(this, coffeeModelArrayList));
-        AtomicReference<ProductAdapter> teaAdapter = new AtomicReference<>(new ProductAdapter(this, teaModelArrayList));
+        //AtomicReference<ProductAdapter> coffeeAdapter = new AtomicReference<>(new ProductAdapter(this, coffeeModelArrayList));
+        //AtomicReference<ProductAdapter> teaAdapter = new AtomicReference<>(new ProductAdapter(this, teaModelArrayList));
 
         List<Product> AllProducts = ReadProductsCSV();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -66,8 +66,9 @@ public class CatalogActivity extends AppCompatActivity {
         //coffeeRecyclerView.setAdapter(coffeeAdapter);
 
         teaRecyclerView.setLayoutManager(linearLayoutManager2);
-        teaRecyclerView.setAdapter(teaAdapter.get());
-        coffeeRecyclerView.setAdapter(coffeeAdapter.get());
+
+        //teaRecyclerView.setAdapter(teaAdapter.get());
+        //coffeeRecyclerView.setAdapter(coffeeAdapter.get());
         //teaRecyclerView.setAdapter(teaAdapter);
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -81,9 +82,11 @@ public class CatalogActivity extends AppCompatActivity {
 
                 //instead of setting the data directly from file
                 //we are setting it after getting it from Database
-                runOnUiThread(() -> {
-                    coffeeAdapter.get().updateList(coffeeModelArrayList);
-                    teaAdapter.get().updateList(teaModelArrayList);
+                runOnUiThread(() ->{
+                    ProductAdapter coffeeAdapter = new ProductAdapter(this, coffeeModelArrayList);
+                    ProductAdapter teaAdapter = new ProductAdapter(this, teaModelArrayList);
+                    teaRecyclerView.setAdapter(teaAdapter);
+                    coffeeRecyclerView.setAdapter(coffeeAdapter);
                 });
             } catch (Exception ex) {
                 Log.d("CoffeeBurst", ex.getMessage());
