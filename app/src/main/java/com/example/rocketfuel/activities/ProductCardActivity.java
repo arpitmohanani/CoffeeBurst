@@ -60,39 +60,32 @@ public class ProductCardActivity extends AppCompatActivity {
 
 
 
-        btnAddToCart.setOnClickListener((View view) -> {
-
-
+            btnAddToCart.setOnClickListener((View view) -> {
             editTextQuantity = findViewById(R.id.txtViewQuantity);
             if (editTextQuantity.getText().toString().isEmpty()) {
                 Log.d(TAG, "Quantity is empty");
                 Toast.makeText(this, "Please enter item quantity", Toast.LENGTH_SHORT).show();
             } else {
 
-
                 try {
-
                     int qty = Integer.parseInt(editTextQuantity.getText().toString());
-                    double total = qty * Integer.parseInt(String.valueOf(drinkPrice));
+                    double priceDouble = Double.parseDouble(productPrice.replaceAll("[$]", ""));
+                    double total = qty * priceDouble;
 
                     Intent myIntent = new Intent(ProductCardActivity.this, OrdersActivity.class);
                     Bundle myBundle = new Bundle();
                     myBundle.putString("PRODUCTNAME", productName);
                     myBundle.putDouble("TOTAL", total);
-
-
                     myIntent.putExtras(myBundle);
                     startActivity(myIntent);
 
                 } catch (Exception ex) {
                     Log.d(TAG, ex.getMessage());
+
                     Toast.makeText(this, "Please enter valid number of items", Toast.LENGTH_SHORT).show();
                     ex.printStackTrace();
                 }
             }
-
-
-
         });
 
     }
