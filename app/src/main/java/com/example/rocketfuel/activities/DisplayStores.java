@@ -126,11 +126,11 @@ public class DisplayStores extends AppCompatActivity {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         if(ActivityCompat.checkSelfPermission(DisplayStores.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            getLocation();
+            //getLocation();
         }else{
             ActivityCompat.requestPermissions(DisplayStores.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
             if(ActivityCompat.checkSelfPermission(DisplayStores.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                getLocation();
+               // getLocation();
             }else{
                 ActivityCompat.requestPermissions(DisplayStores.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
             }
@@ -148,7 +148,7 @@ public class DisplayStores extends AppCompatActivity {
         return listStores;
     }
 
-    @SuppressLint("MissingPermission")
+   /* @SuppressLint("MissingPermission")
     private void getLocation() {
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
@@ -164,9 +164,9 @@ public class DisplayStores extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            }
-        });
-    }
+
+        });}
+    }*/
 
     private void FacebookSignOutSetup(){
         facebookAccessToken = AccessToken.getCurrentAccessToken();
