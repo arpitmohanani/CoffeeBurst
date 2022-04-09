@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -97,12 +98,12 @@ public class CatalogActivity extends AppCompatActivity {
                 new RecyclerItemClickListener(this, coffeeRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        clck(view, position);
+                        click(view, position);
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        clck(view, position);
+                        click(view, position);
                     }
                 })
         );
@@ -111,18 +112,18 @@ public class CatalogActivity extends AppCompatActivity {
                 new RecyclerItemClickListener(this, teaRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        clck(view, position);
+                        click(view, position);
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        clck(view, position);
+                        click(view, position);
                     }
                 })
         );
     }
 
-    private void clck(View view, int position) {
+    private void click(View view, int position) {
         Intent intent = new Intent(CatalogActivity.this, ProductCardActivity.class);
         ProductAdapter.Viewholder mod = (ProductAdapter.Viewholder) coffeeRecyclerView.findViewHolderForAdapterPosition(position);
         String name = (String) Objects.requireNonNull(mod).productNameTV.getText();
