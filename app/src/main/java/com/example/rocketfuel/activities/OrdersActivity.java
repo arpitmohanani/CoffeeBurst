@@ -1,5 +1,6 @@
 package com.example.rocketfuel.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -45,6 +46,7 @@ public class OrdersActivity extends AppCompatActivity {
         }
 
         double finalOrderTotal = orderTotal;
+        btnCheckout = findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener((View view) -> {
 
             Intent chkIntent = new Intent(OrdersActivity.this, CheckoutActivity.class);
