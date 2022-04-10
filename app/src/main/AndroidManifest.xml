@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RocketFuel">
         <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activities.CheckoutActivity"
             android:exported="false" />
         <activity
@@ -43,13 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.SignInPage"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
