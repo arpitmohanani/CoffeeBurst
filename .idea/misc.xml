@@ -18,20 +18,20 @@
         <entry key="..\:/Users/arpit/Desktop/Douglas College/Mobile Application Development - Padmapriya Arasanipalai Kandhadai/RocketFuel/app/src/main/res/layout/activity_signup.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/arpit/Desktop/Douglas College/Mobile Application Development - Padmapriya Arasanipalai Kandhadai/RocketFuel/app/src/main/res/layout/layout_signup.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/arpit/Desktop/Douglas College/Mobile Application Development - Padmapriya Arasanipalai Kandhadai/RocketFuel/app/src/main/res/layout/layout_store.xml" value="0.33177083333333335" />
-        <entry key="..\:/Users/fenu_/Documents/Douglas_College_Course_Materials/CSIS_3175/ProjectRepo/W22_G11_CoffeeBurst/app/src/main/res/layout/activity_catalog.xml" value="0.23233695652173914" />
-        <entry key="..\:/Users/fenu_/Documents/Douglas_College_Course_Materials/CSIS_3175/ProjectRepo/W22_G11_CoffeeBurst/app/src/main/res/layout/activity_checkout.xml" value="0.23233695652173914" />
-        <entry key="..\:/Users/fenu_/Documents/Douglas_College_Course_Materials/CSIS_3175/ProjectRepo/W22_G11_CoffeeBurst/app/src/main/res/layout/activity_display_stores.xml" value="0.23233695652173914" />
-        <entry key="..\:/Users/fenu_/Documents/Douglas_College_Course_Materials/CSIS_3175/ProjectRepo/W22_G11_CoffeeBurst/app/src/main/res/layout/activity_orders.xml" value="0.23233695652173914" />
-        <entry key="..\:/Users/fenu_/Documents/Douglas_College_Course_Materials/CSIS_3175/ProjectRepo/W22_G11_CoffeeBurst/app/src/main/res/layout/activity_view_cart.xml" value="0.1859375" />
-        <entry key="..\:/Users/fenu_/Documents/Douglas_College_Course_Materials/CSIS_3175/ProjectRepo/W22_G11_CoffeeBurst/app/src/main/res/layout/layout_store.xml" value="0.23233695652173914" />
-        <entry key="..\:/Users/fenu_/Documents/Douglas_College_Course_Materials/CSIS_3175/ProjectRepo/W22_G11_CoffeeBurst/app/src/main/res/layout/order_layout.xml" value="0.23233695652173914" />
-        <entry key="..\:/Users/fenu_/Documents/Douglas_College_Course_Materials/CSIS_3175/ProjectRepo/W22_G11_CoffeeBurst/app/src/main/res/layout/product_card_layout.xml" value="0.23233695652173914" />
+        <entry key="..\:/Users/fenu_/Downloads/W22_G11_CoffeeBurst-master (1)/W22_G11_CoffeeBurst-master/app/src/main/res/layout/activity_checkout.xml" value="0.17299898682877407" />
+        <entry key="..\:/Users/fenu_/Downloads/W22_G11_CoffeeBurst-master (1)/W22_G11_CoffeeBurst-master/app/src/main/res/layout/activity_orders.xml" value="0.17299898682877407" />
+        <entry key="..\:/Users/fenu_/Downloads/W22_G11_CoffeeBurst-master (1)/W22_G11_CoffeeBurst-master/app/src/main/res/layout/order_layout.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/activity_catalog.xml" value="0.12291666666666666" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/layout/activity_orders.xml" value="0.15989583333333332" />
+        <entry key="app/src/main/res/layout/activity_signin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.12291666666666666" />
+        <entry key="app/src/main/res/layout/card_layout.xml" value="0.1796875" />
+        <entry key="app/src/main/res/layout/product_card_layout.xml" value="0.1796875" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

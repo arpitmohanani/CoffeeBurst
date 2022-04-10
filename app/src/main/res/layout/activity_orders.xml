@@ -10,43 +10,43 @@
         android:id="@+id/txtViewOrderHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:text="@string/txtViewOrderHeader"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/listViewOrders"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCheckout"
+    <TextView
+        android:id="@+id/txtViewProdName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewOrderHeader" />
+
+    <TextView
+        android:id="@+id/txtViewAmount2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewProdName2" />
 
     <Button
         android:id="@+id/btnCheckout"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/txtCheckout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btnContinueShopping"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="@string/txtContinue"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewOrders" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewAmount2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

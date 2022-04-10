@@ -28,7 +28,7 @@ public class Product {
 
 
     // Constructor
-    public Product(@NonNull String product_code, String product_name, String product_category, double product_price,String product_image) {
+    public Product(@NonNull String product_code, String product_name, String product_category, double product_price, String product_image) {
         this.product_name = product_name;
         this.product_image = product_image;
         this.product_price = product_price;
