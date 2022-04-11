@@ -50,7 +50,7 @@ public class CheckoutActivity extends AppCompatActivity {
         txtVAmount = findViewById(R.id.txtViewAmount);
         Bundle aBundle = getIntent().getExtras();
         nAmount = getIntent().getExtras().getString("FINALTOTAL", "Error");
-        txtVAmount.setText(nAmount);
+        txtVAmount.setText("$"+nAmount);
         
         //orderTotal = getIntent().getExtras().getString("TOTAL", "Error");
 

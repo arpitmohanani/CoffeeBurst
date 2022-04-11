@@ -4,20 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFACB"
     tools:context=".activities.CheckoutActivity">
 
     <!--button for making a payment-->
 
     <!--text view for displaying payment status-->
+
     <TextView
         android:id="@+id/txtViewAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="184dp"
         android:layout_marginEnd="32dp"
+        android:gravity="center_horizontal"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,10 +33,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txtViewAmount"
         android:layout_centerInParent="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="128dp"
         android:text="Make Payment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTVStatus" />
 
@@ -42,14 +46,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/idBtnPay"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="136dp"
         android:layout_marginEnd="32dp"
         android:padding="5dp"
         android:textAlignment="center"
         android:textColor="@color/purple_200"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewAmount" />
+
+    <TextView
+        android:id="@+id/txtviewYourTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Your delicious beverage will cost"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtViewAmount"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496"
+        tools:layout_editor_absoluteX="65dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
