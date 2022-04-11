@@ -30,15 +30,18 @@ public class OrdersActivity extends AppCompatActivity {
 
         String prod_name;
         String orderTotal = "";
+        String prod_qty ="";
+
 
         try {
             Bundle thisBundle = getIntent().getExtras();
             prod_name = getIntent().getExtras().getString("PRODUCTNAME", "Error");
             orderTotal = getIntent().getExtras().getString("TOTAL", "Error");
+            prod_qty = getIntent().getExtras().getString("PRODUCTQTY", "Error");
 
 
             tvProductName = findViewById(R.id.txtViewProdName2);
-            tvProductName.setText(prod_name);
+            tvProductName.setText(prod_name + "   x"+prod_qty);
             tvAmount = findViewById(R.id.txtViewAmount2);
             tvAmount.setText(orderTotal);
             //tvAmount.setText((int) orderTotal);
