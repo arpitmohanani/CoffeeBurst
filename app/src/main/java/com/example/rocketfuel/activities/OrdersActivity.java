@@ -48,7 +48,9 @@ public class OrdersActivity extends AppCompatActivity {
             Log.e(TAG, orderTotal + "");
         }
 
+
         String finalOrderTotal = orderTotal;
+
         btnCheckout = findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener((View view) -> {
 

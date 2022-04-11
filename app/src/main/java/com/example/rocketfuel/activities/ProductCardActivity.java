@@ -75,6 +75,7 @@ public class ProductCardActivity extends AppCompatActivity {
                     Intent myIntent = new Intent(ProductCardActivity.this, OrdersActivity.class);
                     Bundle myBundle = new Bundle();
                     myBundle.putString("PRODUCTNAME", productName);
+
                     myBundle.putString("TOTAL", String.valueOf(total));
                     myIntent.putExtras(myBundle);
                     startActivity(myIntent);
