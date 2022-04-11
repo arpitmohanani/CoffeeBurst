@@ -1,5 +1,6 @@
 package com.example.rocketfuel.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,6 +18,8 @@ import java.text.DecimalFormat;
 
 public class OrdersActivity extends AppCompatActivity {
 
+    TextView tvProductName;
+    TextView tvAmount;
     //OrderLayoutBinding binding;
     final String TAG = "Rocket Fuel";
     Button btnCheckout;
@@ -26,31 +29,35 @@ public class OrdersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_orders);
 
         String prod_name;
-        double orderTotal = 0;
+        String orderTotal = "";
 
         try {
             Bundle thisBundle = getIntent().getExtras();
             prod_name = getIntent().getExtras().getString("PRODUCTNAME", "Error");
-            orderTotal = getIntent().getExtras().getDouble("TOTAL", 0);
+            orderTotal = getIntent().getExtras().getString("TOTAL", "Error");
 
 
-            TextView txtViewProdName = findViewById(R.id.txtViewProdName);
-            txtViewProdName.setText(prod_name);
-            TextView txtViewTotalAmount = findViewById(R.id.txtViewTotal);
-            txtViewTotalAmount.setText((int) orderTotal);
+            tvProductName = findViewById(R.id.txtViewProdName2);
+            tvProductName.setText(prod_name);
+            tvAmount = findViewById(R.id.txtViewAmount2);
+            tvAmount.setText(orderTotal);
+            //tvAmount.setText((int) orderTotal);
 
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.e(TAG, orderTotal + "");
         }
 
-        double finalOrderTotal = orderTotal;
+
+        String finalOrderTotal = orderTotal;
+
+        btnCheckout = findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener((View view) -> {
 
             Intent chkIntent = new Intent(OrdersActivity.this, CheckoutActivity.class);
 
             Bundle chkBundle = new Bundle();
-            chkBundle.putDouble("TOTAL", finalOrderTotal);
+            chkBundle.putString("FINALTOTAL", finalOrderTotal);
 
             chkIntent.putExtras(chkBundle);
             startActivity(chkIntent);

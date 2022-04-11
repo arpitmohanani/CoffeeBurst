@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         TimerTask timerTask = new TimerTask() {
             public void run() {
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                startActivity(new Intent(SplashActivity.this,SignInPage.class));
             }
         };
         Timer timer = new Timer();timer.schedule(timerTask,3000);

@@ -27,9 +27,9 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 public class CheckoutActivity extends AppCompatActivity {
 
-    public static final String clientKey = "EUTGA9AUPLQGA";
+    public static final String clientKey = "AWbMAUS8f_qfQ_EA-A3qgCLCIyCsPzv12blFXcBXTmLnzJCeAFkdAvploG52bLyQP5KxAoxFuu8lBtPp";
     public static final int PAYPAL_REQUEST_CODE = 123;
-
+    public String nAmount;
     // Paypal Configuration Object
     private static PayPalConfiguration config = new PayPalConfiguration()
             // Start with mock environment.  When ready,
@@ -40,14 +40,19 @@ public class CheckoutActivity extends AppCompatActivity {
             .clientId(clientKey);
 
 
-    private TextView amountEdt;
+    private TextView txtVAmount;
     private TextView paymentTV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
-        amountEdt = findViewById(R.id.idEdtAmount);
+        txtVAmount = findViewById(R.id.txtViewAmount);
+        Bundle aBundle = getIntent().getExtras();
+        nAmount = getIntent().getExtras().getString("FINALTOTAL", "Error");
+        txtVAmount.setText("$"+nAmount);
+        
+        //orderTotal = getIntent().getExtras().getString("TOTAL", "Error");
 
         Button makePaymentBtn = findViewById(R.id.idBtnPay);
         paymentTV = findViewById(R.id.idTVStatus);
@@ -68,7 +73,9 @@ public class CheckoutActivity extends AppCompatActivity {
         // Getting the amount from editText
         //String amount = amountEdt.getText().toString();
 
-        double amount = getIntent().getExtras().getDouble("TOTAL", 0);
+        //double amount = getIntent().getExtras().getDouble("TOTAL", 0);
+        //String nAmount;
+        double amount = Double.parseDouble(nAmount);
         // Creating a paypal payment on below line.
         PayPalPayment payment = new PayPalPayment(new BigDecimal(amount), "USD", "Course Fees",
                 PayPalPayment.PAYMENT_INTENT_SALE);
