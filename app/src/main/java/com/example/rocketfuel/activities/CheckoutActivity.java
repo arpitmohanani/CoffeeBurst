@@ -51,15 +51,11 @@ public class CheckoutActivity extends AppCompatActivity {
         Bundle aBundle = getIntent().getExtras();
         nAmount = getIntent().getExtras().getString("FINALTOTAL", "Error");
         txtVAmount.setText("$"+nAmount);
-        
         //orderTotal = getIntent().getExtras().getString("TOTAL", "Error");
-
         Button makePaymentBtn = findViewById(R.id.idBtnPay);
         paymentTV = findViewById(R.id.idTVStatus);
-
         // on below line adding click listener to our make payment button.
         makePaymentBtn.setOnClickListener((View view) -> {
-
                 getPayment();
 
         });
@@ -77,7 +73,7 @@ public class CheckoutActivity extends AppCompatActivity {
         //String nAmount;
         double amount = Double.parseDouble(nAmount);
         // Creating a paypal payment on below line.
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(amount), "USD", "Course Fees",
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(amount), "USD", "Order total",
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
         // Creating Paypal Payment activity intent

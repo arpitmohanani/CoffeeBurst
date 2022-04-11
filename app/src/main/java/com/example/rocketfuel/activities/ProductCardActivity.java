@@ -14,13 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.rocketfuel.R;
-
-import org.w3c.dom.Text;
-
-import java.util.Objects;
 
 public class ProductCardActivity extends AppCompatActivity {
     final String TAG = "Rocket Fuel";
@@ -34,6 +29,8 @@ public class ProductCardActivity extends AppCompatActivity {
     Button btnAddToCart;
     EditText editTextQuantity;
     TextView total;
+    double productSizedPrice = 1;
+    RadioButton radioBtnSmall;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +40,8 @@ public class ProductCardActivity extends AppCompatActivity {
         drinkImage = findViewById(R.id.imgViewProductCardImage);
         drinkPrice = findViewById(R.id.txtViewPrice);
         btnAddToCart = findViewById(R.id.btnAddToCart);
+        radioBtnSmall = findViewById(R.id.radioBtnSmall);
+        radioBtnSmall.setChecked(true);
 
 //        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
  //       getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -70,11 +69,14 @@ public class ProductCardActivity extends AppCompatActivity {
                 try {
                     int qty = Integer.parseInt(editTextQuantity.getText().toString());
                     double priceDouble = Double.parseDouble(productPrice.replaceAll("[$]", ""));
-                    double total = qty * priceDouble;
+                    double total = qty * priceDouble* productSizedPrice;
+
 
                     Intent myIntent = new Intent(ProductCardActivity.this, OrdersActivity.class);
                     Bundle myBundle = new Bundle();
                     myBundle.putString("PRODUCTNAME", productName);
+                    //myBundle.putString("PRODUCTSIZE", String.valueOf(productSizedPrice));
+                    myBundle.putString("PRODUCTQTY", editTextQuantity.getText().toString());
 
                     myBundle.putString("TOTAL", String.valueOf(total));
                     myIntent.putExtras(myBundle);
@@ -97,20 +99,21 @@ public class ProductCardActivity extends AppCompatActivity {
         String selectedValue =  (String) ((RadioButton) findViewById(selectedId)).getText();
         if(selectedValue.equalsIgnoreCase("Small")){
             System.out.println(selectedValue);
+            productSizedPrice = 1;
             drinkPrice.setText("$" + productPrice.replace("$",""));
+
         }
-
-
         else if(selectedValue.equalsIgnoreCase("Medium")){
             System.out.println(selectedValue);
-            drinkPrice.setText(String.valueOf("$" + Double.parseDouble(productPrice.replace("$",""))*1.5));
-        }
+            productSizedPrice = 1.5;
+            drinkPrice.setText(String.valueOf("$" + Double.parseDouble(productPrice.replace("$",""))*productSizedPrice));
 
+        }
         else if(selectedValue.equalsIgnoreCase("Large")){
             System.out.println(selectedValue);
-            drinkPrice.setText(String.valueOf("$" + Double.parseDouble(productPrice.replace("$",""))*2.0));
+            productSizedPrice = 2;
+            drinkPrice.setText(String.valueOf("$" + Double.parseDouble(productPrice.replace("$",""))*productSizedPrice));
+
         }
-
     }
-
 }
