@@ -124,16 +124,22 @@ public class DisplayStores extends AppCompatActivity {
 
 //        txtGreetings.setText("Hi " + fullName);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
+        txtLocation.setVisibility(View.INVISIBLE);
+        if(!(ActivityCompat.checkSelfPermission(DisplayStores.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+            ActivityCompat.requestPermissions(DisplayStores.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
+        }
         if(ActivityCompat.checkSelfPermission(DisplayStores.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            //getLocation();
+            getLocation();
         }else{
             ActivityCompat.requestPermissions(DisplayStores.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
             if(ActivityCompat.checkSelfPermission(DisplayStores.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            // getLocation();
+                getLocation();
             }else{
                 ActivityCompat.requestPermissions(DisplayStores.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
             }
+        }
+        if ((txtLocation.getVisibility() == View.INVISIBLE) && (ActivityCompat.checkSelfPermission(DisplayStores.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+            getLocation();
         }
         txtInstructions.setText("Please select a store nearest to you:");
     }
@@ -148,25 +154,27 @@ public class DisplayStores extends AppCompatActivity {
         return listStores;
     }
 
-//   @SuppressLint("MissingPermission")
-//    private void getLocation() {
-//        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Location> task) {
-//                Location  location = task.getResult();
-//
-//                if(location!=null){
-//                    try {
-//                        Geocoder geo = new Geocoder(DisplayStores.this, Locale.getDefault());
-//                        List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(),1);
-//
-//                        txtLocation.setText("You are in "  + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea()+ ", " + addresses.get(0).getCountryName());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });}
+   @SuppressLint("MissingPermission")
+    private void getLocation() {
+       String locationValue = "";
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location = task.getResult();
+                String locationValue = "";
+                if(location!=null){
+                    try {
+                        Geocoder geo = new Geocoder(DisplayStores.this, Locale.getDefault());
+                        List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(),1);
+                        txtLocation.setText("You are in "  + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea()+ ", " + addresses.get(0).getCountryName());
+                        txtLocation.setVisibility(View.VISIBLE);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
     private void FacebookSignOutSetup(){
         facebookAccessToken = AccessToken.getCurrentAccessToken();

@@ -81,7 +81,7 @@ public class SignInPage extends AppCompatActivity {
 
         btnSignUp.setOnClickListener((View view) -> {
                 startActivity(new Intent(SignInPage.this, SignUpPage.class));
-                finish();
+//                finish();
         });
 
         //Local SignIn

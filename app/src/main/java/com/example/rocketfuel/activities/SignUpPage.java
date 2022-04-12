@@ -45,10 +45,10 @@ public class SignUpPage extends AppCompatActivity {
         createAccount = findViewById(R.id.btnCreateAccount);
         signUpSuccess = false;
 
-        fullName.setText("Arpit");
-        userName.setText("arpit");
-        newPassword.setText("12345678");
-        confirmPassword.setText("12345678");
+//        fullName.setText("Arpit");
+//        userName.setText("arpit");
+//        newPassword.setText("12345678");
+//        confirmPassword.setText("12345678");
 
         db = Room.databaseBuilder(getApplicationContext(),LoginDetailsDatabase.class,"LoginDetails.db").build();
         LoginDetailsDao loginDetailsDao = db.loginDetailsDao();

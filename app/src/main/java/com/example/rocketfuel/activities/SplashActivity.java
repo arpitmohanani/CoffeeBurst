@@ -19,6 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         TimerTask timerTask = new TimerTask() {
             public void run() {
                 startActivity(new Intent(SplashActivity.this,SignInPage.class));
+                finish();
             }
         };
         Timer timer = new Timer();timer.schedule(timerTask,3000);
