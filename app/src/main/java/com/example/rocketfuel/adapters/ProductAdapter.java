@@ -27,10 +27,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
         this.productArrayList = courseModelArrayList;
     }
 
+    // inflate the view
     @NonNull
     @Override
     public ProductAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
         return new Viewholder(view);
     }
@@ -41,7 +41,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
         Product model = productArrayList.get(position);
         holder.productNameTV.setText(model.getProduct_name());
         holder.productPriceIV.setText("$" + model.getProduct_price());
-//        System.out.println(context.getResources().getIdentifier(model.getProduct_image().split("\\.")[0], "drawable", context.getPackageName()));
         holder.productIV.setImageDrawable(AppCompatResources.getDrawable(context,context.getResources().getIdentifier(model.getProduct_image().split("\\.")[0] , "drawable", context.getPackageName())));
     }
 
@@ -56,8 +55,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Viewhold
         return productArrayList.size();
     }
 
-    // View holder class for initializing of
-    // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
         public ImageView productIV;
         public TextView productNameTV, productPriceIV, categoryCoffeeTV, categoryTeaTV;

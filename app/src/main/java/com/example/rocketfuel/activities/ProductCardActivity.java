@@ -54,11 +54,6 @@ public class ProductCardActivity extends AppCompatActivity {
         drinkPrice.setText(productPrice);
         drinkImage.setImageBitmap(intent.getParcelableExtra("im"));
 
-
-
-
-
-
             btnAddToCart.setOnClickListener((View view) -> {
             editTextQuantity = findViewById(R.id.txtViewQuantity);
             if (editTextQuantity.getText().toString().isEmpty()) {
