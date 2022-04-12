@@ -31,17 +31,22 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
-
+// Activity to display the catalog
 public class CatalogActivity extends AppCompatActivity {
-
+    // recyclerview for the categories
     private RecyclerView coffeeRecyclerView;
     private RecyclerView teaRecyclerView;
 
+    // lists for data extracted from DB
     private ArrayList<Product> coffeeModelArrayList;
     private ArrayList<Product> teaModelArrayList;
 
     ActivityCatalogBinding binding;
     ProductDatabase db;
+
+    // boolean flag to determine on what recyclerview item the user clicked
+    boolean isTea = false;
+    boolean isCoffee = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,34 +61,29 @@ public class CatalogActivity extends AppCompatActivity {
         coffeeModelArrayList = new ArrayList<>();
         teaModelArrayList = new ArrayList<>();
 
-        //AtomicReference<ProductAdapter> coffeeAdapter = new AtomicReference<>(new ProductAdapter(this, coffeeModelArrayList));
-        //AtomicReference<ProductAdapter> teaAdapter = new AtomicReference<>(new ProductAdapter(this, teaModelArrayList));
 
+        // Read products from csv
         List<Product> AllProducts = ReadProductsCSV();
+
+        // set up Layout Manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
         coffeeRecyclerView.setLayoutManager(linearLayoutManager);
-        //coffeeRecyclerView.setAdapter(coffeeAdapter);
-
         teaRecyclerView.setLayoutManager(linearLayoutManager2);
 
-        //teaRecyclerView.setAdapter(teaAdapter.get());
-        //coffeeRecyclerView.setAdapter(coffeeAdapter.get());
-        //teaRecyclerView.setAdapter(teaAdapter);
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
             try {
+                // Get items from the db according to a category
                 ProductDao productDao = db.productDao();
                 productDao.insertProductsFromList(AllProducts);
                 coffeeModelArrayList = (ArrayList<Product>) db.productDao().GetProductsOfCategory("Coffee");
                 teaModelArrayList = (ArrayList<Product>) db.productDao().GetProductsOfCategory("Tea");
-                Log.d("Size of the list", String.valueOf(teaModelArrayList.size()));
 
-                //instead of setting the data directly from file
-                //we are setting it after getting it from Database
+
                 runOnUiThread(() ->{
+                    // set up the adapter
                     ProductAdapter coffeeAdapter = new ProductAdapter(this, coffeeModelArrayList);
                     ProductAdapter teaAdapter = new ProductAdapter(this, teaModelArrayList);
                     teaRecyclerView.setAdapter(teaAdapter);
@@ -94,27 +94,27 @@ public class CatalogActivity extends AppCompatActivity {
             }
         });
 
+       // Click listeners for both categories
         coffeeRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, coffeeRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        isCoffee = true;
                         click(view, position);
                     }
-
                     @Override
                     public void onLongItemClick(View view, int position) {
                         click(view, position);
                     }
                 })
         );
-
         teaRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, teaRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        isTea = true;
                         click(view, position);
                     }
-
                     @Override
                     public void onLongItemClick(View view, int position) {
                         click(view, position);
@@ -123,17 +123,22 @@ public class CatalogActivity extends AppCompatActivity {
         );
     }
 
+    // On click get data from the card view and put to a bundle
     private void click(View view, int position) {
         Intent intent = new Intent(CatalogActivity.this, ProductCardActivity.class);
-        ProductAdapter.Viewholder mod = (ProductAdapter.Viewholder) coffeeRecyclerView.findViewHolderForAdapterPosition(position);
+        ProductAdapter.Viewholder mod = null;
+        if(isTea){
+            mod = (ProductAdapter.Viewholder) teaRecyclerView.findViewHolderForAdapterPosition(position);
+        }
+        else if(isCoffee){
+            mod = (ProductAdapter.Viewholder) coffeeRecyclerView.findViewHolderForAdapterPosition(position);
+        }
         String name = (String) Objects.requireNonNull(mod).productNameTV.getText();
         String price = (String) Objects.requireNonNull(mod).productPriceIV.getText();
         Objects.requireNonNull(mod).productIV.buildDrawingCache();
         Bitmap im = Objects.requireNonNull(mod).productIV.getDrawingCache();
-        //Double priceDouble = Double.parseDouble(price);
         intent.putExtra("name", name);
         intent.putExtra("price", price);
-        //int imageId = Objects.requireNonNull(mod).productIV.AppCompatResources.getDrawable(this,this.getResources().getIdentifier(IMAGE_NAME.split("\\.")[0] , "drawable", this.getPackageName())));
         Bundle extras = new Bundle();
         extras.putParcelable("im", im);
         intent.putExtras(extras);
@@ -141,6 +146,7 @@ public class CatalogActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Read the products csv file and write it into a list of products
     private List<Product> ReadProductsCSV(){
         List<Product> productList = new ArrayList<>();
 
